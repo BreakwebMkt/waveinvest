@@ -1,0 +1,2856 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Wave Invest. Transformamos seu imóvel em uma fonte de renda pronta para locação. Pronto para lucrar." />
+<title>Wave Invest · Pronto para lucrar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===========================
+   DESIGN TOKENS
+=========================== */
+:root {
+  --bg:        #eeeeee;     /* light gray */
+  --bg-alt:    #e4e4e4;     /* slightly deeper gray */
+  --bg-dark:   #0f1c2e;     /* navy dark (sections) */
+  --bg-deep:   #0a1424;     /* navy deep (final cta + footer) */
+  --navy:      #0f1c2e;
+  --navy-deep: #0a1424;
+  --navy-mute: #7a8896;
+  --ink:       #15233a;     /* dark navy, text + buttons */
+  --ink-soft:  #3d4d65;
+  --ink-mute:  #7a8896;
+  --line:      rgba(21,35,58,0.10);
+  --line-on-dark: rgba(255,253,247,0.08);
+  --paper:     #fafaf6;
+  --paper-soft: #c4cdd5;
+  --accent:    #7d8a7a;     /* sage acinzentado */
+  --accent-soft: #9da394;
+  --green:     #1f4d3a;     /* deep editorial green */
+  --wpp:       #25d366;     /* whatsapp official */
+}
+
+/* ===========================
+   RESET
+=========================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  font-size: 16px;
+  position: relative;
+}
+
+/* ===========================
+   GRAIN TEXTURE OVERLAY
+=========================== */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 200;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 320'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 320px 320px;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+}
+
+/* subtle decorative blob, adds depth on light sections */
+.solution::before,
+.steps::before,
+.diff::before,
+.faq::before {
+  content: "";
+  position: absolute;
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(125,138,122,0.08), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.solution::before { top: -120px; right: -120px; }
+.steps::before { bottom: -120px; left: -120px; }
+.diff::before { top: 50%; right: -200px; transform: translateY(-50%); }
+.faq::before { top: -80px; left: -80px; width: 380px; height: 380px; }
+.solution > .container,
+.steps > .container,
+.diff > .container,
+.faq > .container { position: relative; z-index: 1; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+::selection { background: var(--ink); color: var(--bg); }
+
+/* ===========================
+   TYPOGRAPHY
+=========================== */
+h1, h2, h3, h4, .display {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  letter-spacing: -0.018em;
+  line-height: 1.05;
+  color: var(--ink);
+  font-variation-settings: "opsz" 144;
+}
+.eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px; height: 1px;
+  background: var(--ink-soft);
+  opacity: .5;
+}
+
+/* ===========================
+   LAYOUT
+=========================== */
+.container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+section { padding: 140px 0; position: relative; }
+@media (max-width: 720px) {
+  .container { padding: 0 24px; }
+  section { padding: 90px 0; }
+}
+
+/* ===========================
+   NAV
+=========================== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 0;
+  background: rgba(238,238,238,0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+  transition: background .3s ease;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.logo small {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.nav-links { display: flex; align-items: center; gap: 40px; }
+.nav-links a {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink-soft);
+  transition: color .25s ease;
+  position: relative;
+}
+.nav-links a:not(.nav-cta):hover { color: var(--ink); }
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  background: var(--ink);
+  color: var(--bg) !important;
+  border-radius: 999px;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em;
+  transition: all .3s ease;
+}
+.nav-cta:hover { background: var(--accent); transform: translateY(-1px); }
+.nav-cta .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--wpp);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .4; transform: scale(1.4); }
+}
+@media (max-width: 900px) {
+  .nav-links a:not(.nav-cta) { display: none; }
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 36px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: all .4s cubic-bezier(.2,.8,.2,1);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+}
+.btn-primary:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(125,138,122,0.28);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+}
+.btn-outline:hover {
+  background: var(--ink);
+  color: var(--bg);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  padding: 14px 0;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--ink);
+  border-radius: 0;
+  padding-bottom: 8px;
+}
+.btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
+.btn-whatsapp {
+  background: var(--wpp);
+  color: #fff;
+}
+.btn-whatsapp:hover {
+  background: #128C7E;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(18,140,126,0.3);
+}
+.btn .arrow {
+  display: inline-block;
+  transition: transform .35s ease;
+  font-size: 16px;
+}
+.btn:hover .arrow { transform: translateX(6px); }
+
+/* ===========================
+   FLOATING WHATSAPP
+=========================== */
+.float-wpp {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: var(--wpp);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 99;
+  box-shadow: 0 14px 32px rgba(37,211,102,0.4);
+  transition: transform .3s ease;
+}
+.float-wpp:hover { transform: scale(1.08); }
+.float-wpp svg { width: 30px; height: 30px; fill: #fff; }
+
+/* ===========================
+   HERO
+=========================== */
+.hero {
+  padding: 130px 0 90px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; right: -10%;
+  width: 60%; height: 100%;
+  background: radial-gradient(circle at 70% 30%, rgba(125,138,122,0.08), transparent 60%);
+  pointer-events: none;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 80px;
+  align-items: stretch;
+  position: relative;
+}
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 0;
+}
+.hero h1 {
+  font-size: clamp(38px, 4.4vw, 68px);
+  margin-bottom: 32px;
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-soft);
+  font-family: 'Fraunces', serif;
+}
+.hero-sub {
+  font-size: 18px;
+  color: var(--ink-soft);
+  margin-bottom: 44px;
+  max-width: 480px;
+  line-height: 1.65;
+}
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 36px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+.hero-trust strong {
+  color: var(--ink);
+  font-weight: 500;
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+.hero-trust .dot { color: var(--ink-mute); opacity: 0.5; }
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.hero-microcopy {
+  margin-top: 20px;
+  font-size: 12.5px;
+  color: var(--ink-mute);
+  letter-spacing: 0.02em;
+}
+.hero-image-wrap {
+  position: relative;
+  min-height: 560px;
+  overflow: hidden;
+  background: var(--bg-alt);
+}
+.hero-image-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 1.4s cubic-bezier(.2,.8,.2,1);
+  filter: contrast(1.04) saturate(0.96);
+}
+.hero-image-wrap:hover img { transform: scale(1.05); }
+.hero-tag {
+  position: absolute;
+  bottom: 28px; left: 28px;
+  background: rgba(250,250,246,0.92);
+  backdrop-filter: blur(10px);
+  padding: 10px 18px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.hero-meta {
+  position: absolute;
+  top: 28px; right: 28px;
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  color: var(--paper);
+  text-align: right;
+  font-style: italic;
+  background: rgba(15,28,46,0.6);
+  padding: 12px 16px;
+  backdrop-filter: blur(8px);
+}
+.hero-stats {
+  margin-top: 100px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.stat-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(34px, 3.4vw, 52px);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.stat-num em { font-style: normal; color: var(--accent); font-weight: 500; }
+.stat-label {
+  font-size: 12px;
+  color: var(--ink-mute);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+@media (max-width: 1100px) {
+  .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 36px; }
+}
+@media (max-width: 900px) {
+  .hero { padding: 140px 0 60px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 50px; align-items: start; }
+  .hero-image-wrap { min-height: 380px; max-height: 480px; }
+  .stat-num { font-size: 36px; }
+}
+@media (max-width: 540px) {
+  .hero-stats { grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 60px; }
+  .stat-num { font-size: 30px; }
+}
+
+/* ===========================
+   MARQUEE
+=========================== */
+.marquee {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 26px 0;
+  overflow: hidden;
+  border-top: 1px solid var(--line-on-dark);
+  border-bottom: 1px solid var(--line-on-dark);
+}
+.marquee-track {
+  display: flex;
+  gap: 60px;
+  white-space: nowrap;
+  animation: marquee 38s linear infinite;
+  align-items: center;
+}
+.marquee-item {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  font-style: italic;
+}
+.marquee-star {
+  color: var(--accent);
+  font-size: 18px;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ===========================
+   PAIN
+=========================== */
+.pain {
+  background: var(--bg-dark);
+  color: var(--paper);
+  position: relative;
+}
+.pain .eyebrow { color: var(--ink-mute); }
+.pain .eyebrow::before { background: var(--ink-mute); }
+.pain-header {
+  max-width: 880px;
+  margin-bottom: 80px;
+}
+.pain h2 {
+  color: var(--paper);
+  font-size: clamp(38px, 4.8vw, 76px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 28px;
+}
+.pain h2 em {
+  font-style: italic;
+  color: var(--accent-soft);
+}
+.pain-intro {
+  font-size: 18px;
+  color: #aab1be;
+  line-height: 1.7;
+  max-width: 640px;
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-style: italic;
+}
+.pain-intro strong {
+  color: var(--paper);
+  font-style: normal;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.pain-item {
+  padding: 40px 32px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--line-on-dark);
+  border-radius: 4px;
+  transition: all .4s cubic-bezier(.2,.8,.2,1);
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+.pain-item::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--accent);
+  transition: width .5s ease;
+}
+.pain-item:hover {
+  background: rgba(125,138,122,0.08);
+  border-color: rgba(157,163,148,0.3);
+  transform: translateY(-4px);
+}
+.pain-item:hover::after { width: 100%; }
+.pain-item-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  gap: 12px;
+}
+.pain-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: 60px;
+  color: var(--accent-soft);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-style: normal;
+  font-weight: 300;
+  display: block;
+}
+.pain-item:hover .pain-num { color: var(--accent); }
+.pain-tag {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8a92a3;
+  padding: 6px 12px;
+  border: 1px solid var(--line-on-dark);
+  border-radius: 999px;
+  white-space: nowrap;
+  font-weight: 500;
+}
+.pain-item h3 {
+  color: var(--paper);
+  font-size: 24px;
+  margin-bottom: 14px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.pain-item p {
+  color: #9ea4b3;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.pain-bridge {
+  margin-top: 80px;
+  padding-top: 50px;
+  border-top: 1px solid var(--line-on-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.pain-bridge p {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: #c5cad6;
+  font-weight: 300;
+  max-width: 560px;
+  line-height: 1.4;
+}
+.pain-bridge-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--accent-soft);
+  border-bottom: 1px solid var(--accent-soft);
+  padding-bottom: 8px;
+  transition: all .3s ease;
+}
+.pain-bridge-link:hover {
+  color: var(--paper);
+  border-color: var(--paper);
+}
+.pain-bridge-link .arrow { transition: transform .35s ease; }
+.pain-bridge-link:hover .arrow { transform: translateX(6px); }
+@media (max-width: 1100px) {
+  .pain-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 540px) {
+  .pain-grid { grid-template-columns: 1fr; }
+  .pain-num { font-size: 52px; }
+  .pain-item { padding: 32px 24px; }
+  .pain-bridge { flex-direction: column; align-items: flex-start; gap: 20px; }
+}
+
+/* ===========================
+   SOLUTION
+=========================== */
+.solution { background: var(--bg); }
+.solution-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 100px;
+  align-items: start;
+}
+.solution-image-col { position: sticky; top: 100px; }
+.solution-image {
+  aspect-ratio: 4/5;
+  background: var(--bg-alt);
+  overflow: hidden;
+  position: relative;
+}
+.solution-image img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: contrast(1.05);
+}
+.solution-image::after {
+  content: "Wave Invest · 2026";
+  position: absolute;
+  bottom: 20px; left: 20px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--paper);
+  background: rgba(15,28,46,0.6);
+  backdrop-filter: blur(6px);
+  padding: 8px 14px;
+}
+.solution-text h2 {
+  font-size: clamp(36px, 4.8vw, 72px);
+  margin-bottom: 36px;
+  font-weight: 300;
+  letter-spacing: -0.025em;
+}
+.solution-text h2 em { font-style: italic; color: var(--ink-soft); }
+.solution-lead {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--ink-soft);
+  margin-bottom: 32px;
+  line-height: 1.45;
+  font-weight: 400;
+  padding-left: 28px;
+  border-left: 1px solid var(--accent);
+}
+.solution-text p {
+  color: var(--ink-soft);
+  font-size: 16px;
+  margin-bottom: 22px;
+  line-height: 1.75;
+  max-width: 560px;
+}
+.solution-tags {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin: 40px 0 50px;
+}
+.solution-tags span {
+  padding: 10px 18px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-soft);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all .3s ease;
+}
+.solution-tags span:hover {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+@media (max-width: 1000px) {
+  .solution-grid { grid-template-columns: 1fr; gap: 60px; }
+  .solution-image-col { position: static; }
+  .solution-image { aspect-ratio: 4/3; max-height: 520px; }
+}
+
+/* ===========================
+   STEPS
+=========================== */
+.steps { background: var(--bg-alt); }
+.steps-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 90px;
+  align-items: end;
+}
+.steps-header h2 {
+  font-size: clamp(36px, 4.8vw, 72px);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+}
+.steps-header h2 em { font-style: italic; color: var(--accent); }
+.steps-header p {
+  color: var(--ink-soft);
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 460px;
+}
+.steps-list {
+  border-top: 1px solid var(--line);
+}
+.step-row {
+  display: grid;
+  grid-template-columns: 80px 1.1fr 1fr 0.9fr;
+  gap: 40px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+  transition: background .3s ease, padding-left .35s ease;
+  position: relative;
+}
+.step-row:hover {
+  padding-left: 20px;
+  background: rgba(255,255,255,0.4);
+}
+.step-row::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 0; height: 1px;
+  background: var(--accent);
+  transition: width .4s ease;
+}
+.step-row:hover::before { width: 12px; }
+.step-row .step-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: 52px;
+  font-weight: 300;
+  color: var(--ink);
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.step-row h3 {
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.step-row p {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+.step-row .step-tag {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-align: right;
+  font-weight: 500;
+}
+@media (max-width: 900px) {
+  .steps-header { grid-template-columns: 1fr; gap: 30px; align-items: start; }
+  .step-row {
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+  }
+  .step-row .step-num { font-size: 38px; }
+  .step-row h3 { font-size: 22px; grid-column: 2; }
+  .step-row p { grid-column: 2; }
+  .step-row .step-tag { display: none; }
+}
+
+/* ===========================
+   PROOF
+=========================== */
+.proof {
+  background: var(--bg);
+  position: relative;
+}
+.proof-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+}
+.proof-text h2 {
+  font-size: clamp(36px, 4.8vw, 72px);
+  margin-bottom: 36px;
+  font-weight: 300;
+  letter-spacing: -0.025em;
+}
+.proof-text h2 em { font-style: italic; color: var(--accent); }
+.proof-text p {
+  color: var(--ink-soft);
+  font-size: 16px;
+  margin-bottom: 22px;
+  line-height: 1.75;
+}
+.proof-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin: 50px 0 40px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.metric {
+  padding: 32px 24px;
+  border-right: 1px solid var(--line);
+}
+.metric:first-child { padding-left: 0; }
+.metric:last-child { border-right: none; padding-right: 0; }
+@media (max-width: 700px) {
+  .proof-metrics { grid-template-columns: 1fr; }
+  .metric { border-right: none; border-bottom: 1px solid var(--line); padding: 24px 0; }
+  .metric:last-child { border-bottom: none; }
+}
+.metric strong {
+  font-family: 'Manrope', sans-serif;
+  font-size: 52px;
+  font-weight: 400;
+  color: var(--ink);
+  display: block;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  margin-bottom: 10px;
+}
+.metric strong em { font-style: normal; color: var(--ink); font-weight: 500; }
+.metric span {
+  font-size: 12px;
+  color: var(--ink-mute);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.proof-visual {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--bg-alt);
+}
+.proof-visual.single {
+  grid-template-columns: 1fr;
+}
+.proof-visual.single > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.04);
+}
+.proof-half {
+  position: relative;
+  overflow: hidden;
+}
+.proof-half img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: contrast(1.04);
+}
+.proof-half:first-child img { filter: grayscale(0.5) contrast(1.02); }
+.proof-label {
+  position: absolute;
+  top: 20px; left: 20px;
+  background: rgba(250,250,246,0.92);
+  backdrop-filter: blur(8px);
+  padding: 8px 14px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.proof-arrow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  z-index: 2;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+}
+@media (max-width: 1000px) {
+  .proof-grid { grid-template-columns: 1fr; gap: 60px; }
+  .proof-visual { aspect-ratio: 5/4; max-height: 520px; }
+}
+
+/* ===========================
+   TESTIMONIALS
+=========================== */
+.testimonials { background: var(--bg); }
+.testimonials-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+  align-items: end;
+}
+.testimonials-header h2 {
+  font-size: clamp(34px, 4.4vw, 64px);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+}
+.testimonials-header h2 em { font-style: italic; color: var(--accent); }
+.testimonials-header p {
+  color: var(--ink-soft);
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 460px;
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.testimonial-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  transition: all .35s ease;
+}
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-soft);
+  box-shadow: 0 30px 60px rgba(15,28,46,0.06);
+}
+.testimonial-rating {
+  font-size: 16px;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+.testimonial-quote {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  flex: 1;
+}
+.testimonial-quote strong {
+  font-weight: 500;
+  color: var(--accent);
+  font-style: italic;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.testimonial-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 400;
+  flex-shrink: 0;
+}
+.testimonial-author strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.testimonial-author span {
+  font-size: 12px;
+  color: var(--ink-mute);
+  letter-spacing: 0.04em;
+}
+.testimonials-cta {
+  margin-top: 80px;
+  padding-top: 48px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.testimonials-cta span {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--ink-soft);
+}
+@media (max-width: 1000px) {
+  .testimonials-header { grid-template-columns: 1fr; gap: 30px; align-items: start; }
+  .testimonials-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+}
+
+/* ===========================
+   GUARANTEE
+=========================== */
+.guarantee { background: var(--bg-alt); }
+.guarantee-card {
+  background: var(--bg-deep);
+  color: var(--paper);
+  padding: 90px 80px 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.guarantee-glow {
+  position: absolute;
+  top: -160px; right: -160px;
+  width: 520px; height: 520px;
+  background: radial-gradient(circle, rgba(125,138,122,0.25), transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+.guarantee-glow::after {
+  content: "";
+  position: absolute;
+  bottom: -240px; left: -180px;
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, rgba(125,138,122,0.12), transparent 70%);
+  pointer-events: none;
+}
+.guarantee-top {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 70px;
+  align-items: center;
+  margin-bottom: 70px;
+  position: relative;
+  z-index: 1;
+}
+
+/* SEAL composition */
+.guarantee-seal {
+  width: 240px; height: 240px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.guarantee-seal::before {
+  /* outer dashed ring */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px dashed rgba(157,163,148,0.35);
+  border-radius: 50%;
+}
+.guarantee-seal::after {
+  /* inner solid ring */
+  content: "";
+  position: absolute;
+  inset: 26px;
+  border: 1px solid rgba(157,163,148,0.18);
+  border-radius: 50%;
+}
+.seal-dot {
+  position: absolute;
+  top: -4px; left: 50%;
+  transform: translateX(-50%);
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 16px rgba(125,138,122,0.8);
+  z-index: 3;
+}
+.seal-shield {
+  width: 90px; height: 90px;
+  color: var(--accent-soft);
+  position: relative;
+  z-index: 2;
+}
+.seal-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  color: var(--paper);
+  opacity: 0.5;
+  font-family: 'Inter', sans-serif;
+  animation: rotateSeal 50s linear infinite;
+}
+@keyframes rotateSeal {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.guarantee-content .eyebrow { color: var(--accent-soft); }
+.guarantee-content .eyebrow::before { background: var(--accent-soft); opacity: .5; }
+.guarantee-content h2 {
+  color: var(--paper);
+  font-size: clamp(34px, 4.4vw, 64px);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin-bottom: 26px;
+}
+.guarantee-content h2 em { font-style: italic; color: var(--accent-soft); }
+.guarantee-content p {
+  color: #a8aebd;
+  font-size: 16px;
+  line-height: 1.75;
+  max-width: 720px;
+}
+
+.guarantee-points {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line-on-dark);
+  position: relative;
+  z-index: 1;
+}
+.g-point {
+  padding: 40px 30px 50px;
+  border-right: 1px solid var(--line-on-dark);
+  transition: background .35s ease, transform .35s ease;
+  position: relative;
+  cursor: default;
+}
+.g-point:last-child { border-right: none; }
+.g-point:hover {
+  background: rgba(125,138,122,0.06);
+}
+.g-point::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--accent);
+  transition: width .45s ease;
+}
+.g-point:hover::after { width: 100%; }
+.g-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--accent-soft);
+  margin-bottom: 22px;
+  display: block;
+  letter-spacing: 0.12em;
+}
+.g-point strong {
+  display: block;
+  color: var(--paper);
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  letter-spacing: -0.005em;
+}
+.g-point p {
+  font-size: 13.5px;
+  color: #8a92a3;
+  line-height: 1.6;
+}
+
+@media (max-width: 1100px) {
+  .guarantee-top { grid-template-columns: 200px 1fr; gap: 50px; }
+  .guarantee-seal { width: 200px; height: 200px; }
+  .seal-shield { width: 72px; height: 72px; }
+  .guarantee-points { grid-template-columns: repeat(2, 1fr); }
+  .g-point { border-bottom: 1px solid var(--line-on-dark); }
+  .g-point:nth-child(2) { border-right: none; }
+  .g-point:nth-child(3), .g-point:nth-child(4) { border-bottom: none; }
+}
+@media (max-width: 700px) {
+  .guarantee-card { padding: 60px 32px 0; }
+  .guarantee-top { grid-template-columns: 1fr; gap: 40px; justify-items: center; text-align: center; margin-bottom: 50px; }
+  .guarantee-content { text-align: left; }
+  .guarantee-points { grid-template-columns: 1fr; }
+  .g-point { border-right: none; border-bottom: 1px solid var(--line-on-dark); padding: 32px 0; }
+  .g-point:last-child { border-bottom: none; }
+}
+
+/* ===========================
+   PACKAGES
+=========================== */
+.packages {
+  background: var(--bg-dark);
+  color: var(--paper);
+  position: relative;
+}
+.packages .eyebrow { color: var(--ink-mute); }
+.packages .eyebrow::before { background: var(--ink-mute); }
+.packages-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 90px;
+  align-items: end;
+}
+.packages-header h2 {
+  color: var(--paper);
+  font-size: clamp(40px, 5.4vw, 88px);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+}
+.packages-header h2 em { font-style: italic; color: var(--accent-soft); }
+.packages-header p {
+  color: var(--ink-mute);
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 460px;
+}
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+.pkg-card {
+  background: rgba(255,253,247,0.03);
+  border: 1px solid var(--line-on-dark);
+  padding: 50px 38px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all .4s ease;
+}
+.pkg-card:hover {
+  background: rgba(255,253,247,0.05);
+  transform: translateY(-6px);
+  border-color: rgba(255,253,247,0.18);
+}
+.pkg-card.featured {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--paper);
+}
+.pkg-card.featured:hover {
+  background: var(--paper);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+}
+.pkg-badge {
+  position: absolute;
+  top: -12px; left: 38px;
+  background: var(--accent);
+  color: var(--paper);
+  padding: 7px 16px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 999px;
+}
+.pkg-plan {
+  margin: -10px -10px 36px;
+  padding: 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--line-on-dark);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: background .35s ease, border-color .35s ease;
+}
+.pkg-plan::before {
+  content: "Planta sugerida";
+  position: absolute;
+  top: 12px; left: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  background: rgba(15,28,46,0.7);
+  backdrop-filter: blur(6px);
+  padding: 5px 10px;
+  border-radius: 999px;
+  z-index: 2;
+}
+.pkg-plan img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 320px;
+  display: block;
+  object-fit: contain;
+  filter: contrast(1.04);
+}
+.pkg-card.featured .pkg-plan {
+  background: rgba(15,28,46,0.04);
+  border-color: var(--line);
+}
+.pkg-card.featured .pkg-plan::before {
+  color: var(--accent);
+  background: rgba(250,250,246,0.85);
+}
+
+.pkg-tier {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 32px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--accent-soft);
+  letter-spacing: 0.04em;
+}
+.pkg-card.featured .pkg-tier { color: var(--accent); }
+.pkg-tier-num {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-style: normal;
+  font-family: 'Inter', sans-serif;
+}
+.pkg-card h3 {
+  color: var(--paper);
+  font-size: 40px;
+  margin-bottom: 12px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.pkg-card.featured h3 { color: var(--ink); }
+.pkg-tagline {
+  color: var(--ink-mute);
+  font-size: 15px;
+  margin-bottom: 36px;
+  font-style: italic;
+  font-family: 'Fraunces', serif;
+}
+.pkg-card.featured .pkg-tagline { color: var(--ink-soft); }
+.pkg-price {
+  margin-bottom: 36px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--line-on-dark);
+}
+.pkg-card.featured .pkg-price { border-color: var(--line); }
+.pkg-price small {
+  font-size: 11px;
+  color: var(--ink-mute);
+  display: block;
+  margin-bottom: 6px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.pkg-card.featured .pkg-price small { color: var(--ink-mute); }
+.pkg-price strong {
+  font-family: 'Manrope', sans-serif;
+  font-size: 52px;
+  font-weight: 400;
+  color: var(--paper);
+  letter-spacing: -0.035em;
+  display: block;
+  line-height: 1;
+}
+.pkg-card.featured .pkg-price strong { color: var(--ink); }
+.pkg-list {
+  flex: 1;
+  margin-bottom: 36px;
+}
+.pkg-list li {
+  font-size: 13.5px;
+  color: #c2bdb1;
+  padding: 12px 0 12px 22px;
+  border-bottom: 1px solid var(--line-on-dark);
+  position: relative;
+  line-height: 1.5;
+}
+.pkg-card.featured .pkg-list li {
+  color: var(--ink-soft);
+  border-color: var(--line);
+}
+.pkg-list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 19px;
+  width: 10px; height: 1px;
+  background: var(--accent-soft);
+}
+.pkg-card.featured .pkg-list li::before { background: var(--accent); }
+.pkg-list li:last-child { border-bottom: none; }
+.pkg-card .btn { width: 100%; justify-content: center; }
+.pkg-card .btn-outline {
+  border-color: rgba(255,253,247,0.25);
+  color: var(--paper);
+}
+.pkg-card .btn-outline:hover {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+.pkg-card.featured .btn-outline {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.pkg-card.featured .btn-outline:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+@media (max-width: 1100px) {
+  .packages-header { grid-template-columns: 1fr; gap: 30px; align-items: start; }
+  .packages-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; gap: 40px; }
+}
+
+/* ===========================
+   DIFFERENTIALS
+=========================== */
+.diff {
+  background: var(--bg-alt);
+}
+.diff-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+  align-items: end;
+}
+.diff-header h2 {
+  font-size: clamp(36px, 4.8vw, 72px);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+}
+.diff-header h2 em { font-style: italic; color: var(--accent); }
+.diff-header p {
+  color: var(--ink-soft);
+  font-size: 17px;
+  line-height: 1.7;
+}
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.diff-item {
+  padding: 50px 26px;
+  border-right: 1px solid var(--line);
+  transition: background .3s ease;
+  position: relative;
+}
+.diff-item:last-child { border-right: none; }
+.diff-item:hover { background: var(--bg); }
+.diff-num {
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  margin-bottom: 30px;
+  display: block;
+}
+.diff-item h3 {
+  font-size: 22px;
+  margin-bottom: 14px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.diff-item p {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+@media (max-width: 1100px) {
+  .diff-header { grid-template-columns: 1fr; gap: 30px; align-items: start; }
+  .diff-grid { grid-template-columns: repeat(2, 1fr); }
+  .diff-item { border-bottom: 1px solid var(--line); }
+  .diff-item:nth-child(even) { border-right: none; }
+}
+@media (max-width: 540px) {
+  .diff-grid { grid-template-columns: 1fr; }
+  .diff-item { border-right: none; }
+}
+
+/* ===========================
+   FAQ
+=========================== */
+.faq { background: var(--bg); }
+.faq-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.4fr;
+  gap: 100px;
+  align-items: start;
+}
+.faq-side h2 {
+  font-size: clamp(36px, 4.8vw, 72px);
+  margin-bottom: 28px;
+  font-weight: 300;
+  letter-spacing: -0.025em;
+}
+.faq-side h2 em { font-style: italic; color: var(--accent); }
+.faq-side p {
+  color: var(--ink-soft);
+  font-size: 16px;
+  margin-bottom: 36px;
+  line-height: 1.75;
+  max-width: 380px;
+}
+.faq-list {
+  border-top: 1px solid var(--line);
+}
+.faq-item {
+  border-bottom: 1px solid var(--line);
+  transition: background .3s ease;
+}
+.faq-item:hover { background: rgba(255,253,247,0.4); }
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 36px 0;
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  letter-spacing: -0.01em;
+  transition: color .25s ease;
+}
+.faq-q:hover { color: var(--accent); }
+.faq-q-num {
+  font-size: 12px;
+  color: var(--accent);
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-right: auto;
+  font-weight: 500;
+  flex-shrink: 0;
+  min-width: 60px;
+}
+.faq-q-text { flex: 1; }
+.faq-icon {
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--ink-mute);
+  transition: transform .35s ease, color .25s ease;
+  flex-shrink: 0;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); color: var(--accent); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .45s ease;
+}
+.faq-a-inner {
+  padding: 0 80px 36px 60px;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.8;
+  max-width: 720px;
+}
+.faq-item.open .faq-a { max-height: 360px; }
+@media (max-width: 1000px) {
+  .faq-grid { grid-template-columns: 1fr; gap: 50px; }
+  .faq-q { font-size: 22px; padding: 28px 0; }
+  .faq-q-num { min-width: auto; }
+  .faq-a-inner { padding: 0 0 28px 0; }
+}
+
+/* ===========================
+   FINAL CTA
+=========================== */
+.final-cta {
+  background: var(--bg-deep);
+  color: var(--paper);
+  text-align: center;
+  padding: 160px 0 130px;
+  position: relative;
+  overflow: hidden;
+}
+.cta-decorations {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.cta-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(8px);
+}
+.cta-glow-top {
+  top: -240px; left: 50%;
+  transform: translateX(-50%);
+  width: 900px; height: 900px;
+  background: radial-gradient(circle, rgba(125,138,122,0.22), transparent 60%);
+}
+.cta-glow-bottom {
+  bottom: -300px; left: 50%;
+  transform: translateX(-50%);
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(125,138,122,0.08), transparent 70%);
+}
+.final-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(157,163,148,0.08) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+.final-cta-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.final-cta .eyebrow { color: var(--accent-soft); justify-content: center; }
+.final-cta .eyebrow::before { background: var(--accent-soft); opacity: 0.55; }
+.final-cta h2 {
+  color: var(--paper);
+  font-size: clamp(40px, 5.4vw, 84px);
+  margin-bottom: 32px;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+.final-cta h2 em { font-style: italic; color: var(--accent-soft); }
+.final-cta-sub {
+  color: #a0a8b5;
+  font-size: 17px;
+  margin-bottom: 56px;
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+/* CTA action block */
+.cta-action-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 90px;
+}
+.btn-cta-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 32px 14px 14px;
+  background: var(--paper);
+  color: var(--navy);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all .4s cubic-bezier(.2,.8,.2,1);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+}
+.btn-cta-main:hover {
+  background: var(--accent);
+  color: var(--paper);
+  transform: translateY(-3px);
+  box-shadow: 0 24px 56px rgba(125,138,122,0.4);
+}
+.cta-wpp-icon {
+  width: 44px; height: 44px;
+  background: var(--wpp);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background .35s ease;
+}
+.btn-cta-main:hover .cta-wpp-icon {
+  background: var(--paper);
+}
+.cta-wpp-icon svg {
+  width: 22px; height: 22px;
+  fill: #fff;
+  transition: fill .35s ease;
+}
+.btn-cta-main:hover .cta-wpp-icon svg {
+  fill: var(--accent);
+}
+.btn-cta-main .arrow {
+  font-size: 16px;
+  transition: transform .35s ease;
+}
+.btn-cta-main:hover .arrow { transform: translateX(6px); }
+
+.cta-microcopy {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--navy-mute);
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+.cta-pulse {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--wpp);
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0 0 0 0 rgba(37,211,102,0.6);
+  animation: ctaPulse 2s ease-in-out infinite;
+}
+@keyframes ctaPulse {
+  0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.6); }
+  70% { box-shadow: 0 0 0 12px rgba(37,211,102,0); }
+  100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+}
+
+/* CTA meta row */
+.cta-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 56px;
+  padding-top: 60px;
+  border-top: 1px solid var(--line-on-dark);
+  flex-wrap: wrap;
+}
+.cta-meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.cta-meta-item strong {
+  font-family: 'Manrope', sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--paper);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.cta-meta-item span {
+  font-size: 11px;
+  color: var(--navy-mute);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.cta-meta-divider {
+  width: 1px;
+  height: 36px;
+  background: var(--line-on-dark);
+  display: inline-block;
+}
+
+@media (max-width: 700px) {
+  .final-cta { padding: 100px 0 80px; }
+  .cta-meta { gap: 28px; flex-direction: column; }
+  .cta-meta-divider { display: none; }
+  .btn-cta-main { padding: 10px 24px 10px 10px; font-size: 11px; gap: 12px; }
+  .cta-wpp-icon { width: 38px; height: 38px; }
+  .cta-wpp-icon svg { width: 18px; height: 18px; }
+  .cta-microcopy { font-size: 11px; flex-direction: column; gap: 8px; text-align: center; }
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+.footer {
+  background: var(--bg-deep);
+  color: #999;
+  padding: 100px 0 30px;
+  border-top: 1px solid var(--line-on-dark);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.2fr 1fr;
+  gap: 60px;
+  margin-bottom: 80px;
+}
+.footer h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--paper);
+  margin-bottom: 28px;
+}
+.footer-brand .footer-logo {
+  font-family: 'Fraunces', serif;
+  font-size: 42px;
+  font-weight: 400;
+  color: var(--paper);
+  line-height: 1;
+  margin-bottom: 22px;
+  display: block;
+  letter-spacing: -0.01em;
+}
+.footer-brand .footer-logo span {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.42em;
+  font-weight: 500;
+  color: var(--accent-soft);
+  margin-top: 10px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  text-transform: uppercase;
+}
+.footer-brand p {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--ink-mute);
+  max-width: 280px;
+}
+.footer-links ul li { margin-bottom: 14px; }
+.footer-links ul li a {
+  font-size: 14px;
+  color: #999;
+  transition: color .25s ease;
+}
+.footer-links ul li a:hover { color: var(--accent-soft); }
+.footer-contact p {
+  font-size: 14px;
+  color: var(--ink-mute);
+  margin-bottom: 10px;
+  line-height: 1.65;
+}
+.footer-contact .footer-map-link {
+  color: var(--accent-soft);
+  font-size: 13px;
+  border-bottom: 1px solid rgba(157,163,148,0.4);
+  padding-bottom: 2px;
+  transition: all .25s ease;
+}
+.footer-contact .footer-map-link:hover { border-color: var(--accent-soft); }
+.footer-contact .footer-horario {
+  margin-top: 18px;
+  font-size: 13px;
+  color: #777;
+  font-style: italic;
+  font-family: 'Fraunces', serif;
+}
+.social-icons {
+  display: flex;
+  gap: 12px;
+}
+.social-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,253,247,0.04);
+  border: 1px solid var(--line-on-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .3s ease;
+  color: var(--paper);
+}
+.social-icon:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.social-icon svg { width: 18px; height: 18px; }
+.footer-trust {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  padding: 36px 0;
+  margin-bottom: 30px;
+  border-top: 1px solid var(--line-on-dark);
+  border-bottom: 1px solid var(--line-on-dark);
+}
+.footer-trust-item strong {
+  font-family: 'Manrope', sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--paper);
+  display: block;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  margin-bottom: 8px;
+}
+.footer-trust-item span {
+  font-size: 12px;
+  color: var(--ink-mute);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+@media (max-width: 700px) {
+  .footer-trust { grid-template-columns: 1fr 1fr; gap: 24px; }
+}
+
+.footer-bottom {
+  padding-top: 30px;
+  border-top: 1px solid var(--line-on-dark);
+  font-size: 12px;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-bottom em {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: #888;
+}
+@media (max-width: 1000px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 50px; }
+}
+@media (max-width: 600px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+  .footer { padding: 70px 0 30px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+/* ===========================
+   ANIMATIONS
+=========================== */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(.2,.8,.2,1); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+</style>
+</head>
+<body>
+
+<!-- ================== NAV ================== -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo">Wave Invest</a>
+    <div class="nav-links">
+      <a href="#solucao">Solução</a>
+      <a href="#como">Processo</a>
+      <a href="#pacotes">Pacotes</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://api.whatsapp.com/send/?phone=5511921396448&text=Quero%20transformar%20meu%20im%C3%B3vel%20em%20renda&type=phone_number&app_absent=0" class="nav-cta">
+        <span class="dot"></span> Falar com a Wave
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================== HERO ================== -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">Wave Invest · Pronto para lucrar</span>
+        <h1>Seu imóvel pode estar parado <em>enquanto você perde dinheiro.</em></h1>
+        <p class="hero-sub">
+          Em até 45 dias, transformamos seu imóvel num apartamento pronto para locação por temporada. Projeto, obra, marcenaria, decoração e enxoval entregues chave na mão. Você recebe pronto para anunciar.
+        </p>
+
+        <div class="hero-actions">
+          <a href="https://api.whatsapp.com/send/?phone=5511921396448&text=Ol%C3%A1%2C%20quero%20receber%20o%20estudo%20gratuito%20do%20meu%20im%C3%B3vel&type=phone_number&app_absent=0" class="btn btn-primary">
+            Quero lucrar com meu imóvel <span class="arrow">→</span>
+          </a>
+          <a href="#pacotes" class="btn btn-ghost">Ver pacotes →</a>
+        </div>
+
+        <p class="hero-microcopy">Sem compromisso · Resposta em até 1 hora útil · Análise feita por especialista</p>
+      </div>
+
+      <div class="hero-image-wrap">
+        <span class="hero-meta">índice<br><em>01 / 06</em></span>
+        <img src="images/hero-apto.jpg" alt="Apartamento entregue pela Wave Invest pronto para locação" />
+        <span class="hero-tag">Airbnb Premium · São Paulo</span>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">+R$&nbsp;<em>12k</em></span>
+        <span class="stat-label">Renda média mensal</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num"><em>45</em>&nbsp;dias</span>
+        <span class="stat-label">Entrega chave na mão</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">+<em>200</em>%</span>
+        <span class="stat-label">Valorização média</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num"><em>4,9</em>&nbsp;★</span>
+        <span class="stat-label">Avaliação dos hóspedes</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== MARQUEE ================== -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item">Pronto para lucrar</span>
+    <span class="marquee-star">✦</span>
+    <span class="marquee-item"><em>Imóveis que rendem</em></span>
+    <span class="marquee-star">✦</span>
+    <span class="marquee-item">Chave na mão</span>
+    <span class="marquee-star">✦</span>
+    <span class="marquee-item"><em>Sem dor de cabeça</em></span>
+    <span class="marquee-star">✦</span>
+    <span class="marquee-item">Wave Invest</span>
+    <span class="marquee-star">✦</span>
+    <span class="marquee-item"><em>Pronto para lucrar</em></span>
+    <span class="marquee-star">✦</span>
+    <span class="marquee-item">Imóveis que rendem</span>
+    <span class="marquee-star">✦</span>
+    <span class="marquee-item"><em>Chave na mão</em></span>
+    <span class="marquee-star">✦</span>
+    <span class="marquee-item">Sem dor de cabeça</span>
+    <span class="marquee-star">✦</span>
+    <span class="marquee-item"><em>Wave Invest</em></span>
+    <span class="marquee-star">✦</span>
+  </div>
+</div>
+
+<!-- ================== PAIN ================== -->
+<section class="pain">
+  <div class="container">
+    <div class="pain-header">
+      <span class="eyebrow">A realidade do investidor</span>
+      <h2>Seu imóvel deveria estar gerando renda. <em>Não dor de cabeça.</em></h2>
+      <p class="pain-intro">
+        A maior parte dos imóveis comprados como investimento <strong>nunca</strong> atinge a renda que poderia. O motivo quase nunca é o imóvel. É o caminho até a primeira diária.
+      </p>
+    </div>
+
+    <div class="pain-grid">
+      <article class="pain-item">
+        <div class="pain-item-top">
+          <span class="pain-num">01</span>
+          <span class="pain-tag">Custo invisível</span>
+        </div>
+        <h3>Imóvel parado</h3>
+        <p>Condomínio, IPTU e a renda que não chega. Cada mês fechado é um buraco silencioso no seu fluxo de caixa.</p>
+      </article>
+
+      <article class="pain-item">
+        <div class="pain-item-top">
+          <span class="pain-num">02</span>
+          <span class="pain-tag">Tempo perdido</span>
+        </div>
+        <h3>Sem tempo</h3>
+        <p>Coordenar fornecedores, conferir entregas, brigar por prazo. É um segundo emprego sem salário. E você já tem o seu.</p>
+      </article>
+
+      <article class="pain-item">
+        <div class="pain-item-top">
+          <span class="pain-num">03</span>
+          <span class="pain-tag">Margem queimada</span>
+        </div>
+        <h3>Erros em obra</h3>
+        <p>Material errado, marcenaria fora da medida, retrabalho. Cada erro queima margem e adia a primeira diária em semanas.</p>
+      </article>
+
+      <article class="pain-item">
+        <div class="pain-item-top">
+          <span class="pain-num">04</span>
+          <span class="pain-tag">Diária abaixo</span>
+        </div>
+        <h3>Baixa performance</h3>
+        <p>Sofá genérico, foto sem cuidado, anúncio sem alma. O imóvel até loca, mas com diária e ocupação bem abaixo do que poderia render.</p>
+      </article>
+    </div>
+
+    <div class="pain-bridge">
+      <p>Cada item dessa lista a Wave Invest resolve. Sem improviso, sem aditivo, sem desculpa.</p>
+      <a href="#solucao" class="pain-bridge-link">Ver como a Wave resolve <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================== SOLUTION ================== -->
+<section class="solution" id="solucao">
+  <div class="container solution-grid">
+    <div class="solution-image-col">
+      <div class="solution-image">
+        <img src="images/solucao.png" alt="Interior premium projetado pela Wave Invest" />
+      </div>
+    </div>
+
+    <div class="solution-text">
+      <span class="eyebrow">A solução Wave Invest</span>
+      <h2>Um serviço completo. <em>Um imóvel pronto para lucrar.</em></h2>
+
+      <p class="solution-lead">
+        Você entrega as chaves. Nós entregamos renda. Cada decisão é tomada com um único objetivo: maximizar a rentabilidade do seu imóvel.
+      </p>
+
+      <p>
+        A Wave Invest assume o projeto inteiro. Estratégia, obra executada por
+        equipe especializada, marcenaria sob medida, decoração curada e enxoval
+        pensados para performance na locação.
+      </p>
+      <p>
+        Sem fornecedor genérico, sem improviso, sem retrabalho.
+        Cada detalhe é planejado para que o seu imóvel se destaque no anúncio.
+      </p>
+
+      <div class="solution-tags">
+        <span>Projeto</span>
+        <span>Obra</span>
+        <span>Marcenaria</span>
+        <span>Decoração</span>
+        <span>Enxoval</span>
+        <span>Ambientação</span>
+        <span>Fotografia</span>
+      </div>
+
+      <a href="https://api.whatsapp.com/send/?phone=5511921396448&text=Quero%20conhecer%20o%20servi%C3%A7o%20Wave%20Invest&type=phone_number&app_absent=0" class="btn btn-primary">
+        Conhecer o serviço <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================== STEPS ================== -->
+<section class="steps" id="como">
+  <div class="container">
+    <div class="steps-header">
+      <div>
+        <span class="eyebrow">Como funciona</span>
+        <h2>Do projeto à <em>locação.</em></h2>
+      </div>
+      <p>Um processo claro, controlado e desenhado para entregar o seu imóvel pronto para gerar renda.</p>
+    </div>
+
+    <div class="steps-list">
+      <div class="step-row">
+        <span class="step-num">01</span>
+        <h3>Projeto estratégico</h3>
+        <p>Diagnóstico e projeto pensados para maximizar atratividade na locação.</p>
+        <span class="step-tag">Etapa 01 / 06</span>
+      </div>
+      <div class="step-row">
+        <span class="step-num">02</span>
+        <h3>Gestão de materiais</h3>
+        <p>Compra, logística e curadoria de tudo que entra na obra.</p>
+        <span class="step-tag">Etapa 02 / 06</span>
+      </div>
+      <div class="step-row">
+        <span class="step-num">03</span>
+        <h3>Equipe especializada</h3>
+        <p>Profissionais selecionados, especializados em obras voltadas para locação.</p>
+        <span class="step-tag">Etapa 03 / 06</span>
+      </div>
+      <div class="step-row">
+        <span class="step-num">04</span>
+        <h3>Gerenciamento da obra</h3>
+        <p>Acompanhamento técnico, prazos, qualidade e relatórios. Tudo controlado de ponta a ponta.</p>
+        <span class="step-tag">Etapa 04 / 06</span>
+      </div>
+      <div class="step-row">
+        <span class="step-num">05</span>
+        <h3>Produção e ambientação</h3>
+        <p>Marcenaria, decoração e enxoval instalados.</p>
+        <span class="step-tag">Etapa 05 / 06</span>
+      </div>
+      <div class="step-row">
+        <span class="step-num">06</span>
+        <h3>Entrega pronta para locação</h3>
+        <p>Imóvel fotogênico, equipado e ambientado. Pronto para anúncio.</p>
+        <span class="step-tag">Etapa 06 / 06</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== PROOF ================== -->
+<section class="proof">
+  <div class="container proof-grid">
+    <div class="proof-text">
+      <span class="eyebrow">Resultados</span>
+      <h2>Mais que reforma. <em>Valorização real.</em></h2>
+      <p>
+        Imóveis que passam pela Wave Invest entram no mercado prontos para
+        diárias premium. O resultado vai muito além de uma decoração bonita:
+        é renda mensurável e valorização do ativo.
+      </p>
+
+      <div class="proof-metrics">
+        <div class="metric">
+          <strong>+<em>78</em>%</strong>
+          <span>Aumento médio na diária</span>
+        </div>
+        <div class="metric">
+          <strong><em>92</em>%</strong>
+          <span>Taxa de ocupação Airbnb</span>
+        </div>
+        <div class="metric">
+          <strong>+R$<em>150</em>k</strong>
+          <span>Valorização do imóvel</span>
+        </div>
+      </div>
+
+      <a href="https://api.whatsapp.com/send/?phone=5511921396448&text=Quero%20ver%20cases%20da%20Wave%20Invest&type=phone_number&app_absent=0" class="btn btn-whatsapp">
+        Ver cases reais <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <div class="proof-visual single">
+      <span class="proof-label">Resultado Wave Invest</span>
+      <img src="images/resultados.png" alt="Resultado de imóvel transformado pela Wave Invest" />
+    </div>
+  </div>
+</section>
+
+<!-- ================== TESTIMONIALS ================== -->
+<section class="testimonials" id="depoimentos">
+  <div class="container">
+    <div class="testimonials-header">
+      <div>
+        <span class="eyebrow">Quem já confiou</span>
+        <h2>Investidores que <em>já estão lucrando.</em></h2>
+      </div>
+      <p>Histórias reais de proprietários que tiraram o imóvel da gaveta com a Wave. Resultados específicos, em endereços específicos.</p>
+    </div>
+
+    <div class="testimonials-grid">
+
+      <article class="testimonial-card">
+        <div class="testimonial-rating">★★★★★</div>
+        <p class="testimonial-quote">
+          Tinha um apê parado há 8 meses. A Wave entregou em 42 dias o projeto. <strong>Primeira diária saiu em 6 dias</strong> e hoje rodo 91% de ocupação.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <strong>Mariana S.</strong>
+            <span>Pinheiros · Pacote Essencial</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card">
+        <div class="testimonial-rating">★★★★★</div>
+        <p class="testimonial-quote">
+          Saí de R$ 2.300 de aluguel longo prazo para <strong>R$ 9.800/mês de média no Airbnb</strong>. O retorno do projeto fechou em 14 meses. Sem fingir, é exatamente o que prometeram.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">R</div>
+          <div>
+            <strong>Rafael M.</strong>
+            <span>Vila Madalena · Pacote PRO</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card">
+        <div class="testimonial-rating">★★★★★</div>
+        <p class="testimonial-quote">
+          O que mais me convenceu foi o <strong>orçamento fechado</strong>. Sem surpresa de obra, sem aditivo. Recebi planilha de cada item. Diária média hoje é R$ 380.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">C</div>
+          <div>
+            <strong>Camila A.</strong>
+            <span>Itaim Bibi · Pacote Start</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="testimonials-cta">
+      <span>Pronto para somar à lista?</span>
+      <a href="https://api.whatsapp.com/send/?phone=5511921396448&text=Ol%C3%A1%2C%20quero%20receber%20o%20estudo%20gratuito%20do%20meu%20im%C3%B3vel&type=phone_number&app_absent=0" class="btn btn-primary">
+        Quero lucrar com meu imóvel <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================== GUARANTEE ================== -->
+<section class="guarantee">
+  <div class="container">
+    <div class="guarantee-card">
+      <div class="guarantee-glow"></div>
+
+      <div class="guarantee-top">
+        <div class="guarantee-seal">
+          <span class="seal-dot"></span>
+          <svg class="seal-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+          <svg class="seal-ring" viewBox="0 0 200 200">
+            <defs>
+              <path id="seal-curve" d="M 100, 100 m -80, 0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0" />
+            </defs>
+            <text font-size="11" letter-spacing="3.6" fill="currentColor">
+              <textPath href="#seal-curve">
+                · GARANTIA WAVE INVEST · GARANTIA WAVE INVEST · GARANTIA WAVE INVEST ·
+              </textPath>
+            </text>
+          </svg>
+        </div>
+
+        <div class="guarantee-content">
+          <span class="eyebrow">Risco zero pra você</span>
+          <h2>Garantia em contrato. <em>Por 12 meses.</em></h2>
+          <p>Orçamento fechado, sem aditivo. Cronograma com data de entrega registrada em contrato. Garantia estendida em marcenaria, instalação elétrica e hidráulica. Se algo do escopo falhar nesse período, a equipe própria volta e resolve, sem custo.</p>
+        </div>
+      </div>
+
+      <div class="guarantee-points">
+        <article class="g-point">
+          <span class="g-num">01</span>
+          <strong>Orçamento fechado</strong>
+          <p>Valor final fechado antes da obra começar. Sem aditivo, sem surpresa.</p>
+        </article>
+        <article class="g-point">
+          <span class="g-num">02</span>
+          <strong>Cronograma em contrato</strong>
+          <p>Data de entrega registrada e respeitada. Atraso da Wave gera desconto.</p>
+        </article>
+        <article class="g-point">
+          <span class="g-num">03</span>
+          <strong>Equipe própria</strong>
+          <p>Execução feita por time interno. Sem terceirização da obra.</p>
+        </article>
+        <article class="g-point">
+          <span class="g-num">04</span>
+          <strong>Pós-obra acompanhado</strong>
+          <p>Visita técnica programada em 30, 90 e 180 dias após a entrega.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== PACKAGES ================== -->
+<section class="packages" id="pacotes">
+  <div class="container">
+    <div class="packages-header">
+      <div>
+        <span class="eyebrow">Pacotes Wave Invest</span>
+        <h2>Escolha o pacote certo <em>para o seu lucro.</em></h2>
+      </div>
+      <p>Três caminhos. Um único objetivo: transformar seu imóvel em renda recorrente. Pacotes completos com obra, marcenaria, decoração e enxoval, pensados para performance.</p>
+    </div>
+
+    <div class="packages-grid">
+
+      <!-- START -->
+      <div class="pkg-card">
+        <div class="pkg-plan">
+          <img src="images/plano.start.png" alt="Planta baixa do Pacote Start" loading="lazy" />
+        </div>
+        <span class="pkg-tier">
+          <span class="pkg-tier-num">01</span> · <em>Entrada estratégica</em>
+        </span>
+        <h3>Start</h3>
+        <p class="pkg-tagline">Ideal para começar rápido</p>
+        <div class="pkg-price">
+          <small>Investimento</small>
+          <strong>R$ 69.900</strong>
+        </div>
+        <ul class="pkg-list">
+          <li>Proteção do ambiente</li>
+          <li>Piso cerâmico com rodapé</li>
+          <li>Cerâmica na parede da bancada da cozinha</li>
+          <li>Corte na bancada existente para instalação do cooktop</li>
+          <li>Instalação de spots sobrepostos quadrados ou redondos de LED nos pontos existentes</li>
+          <li>Retoque de pintura na cor branca</li>
+          <li>Kit metais banheiro</li>
+          <li>Box vidro temperado incolor e espelho padrão</li>
+          <li>Cortina blackout</li>
+          <li>Cama box e enxoval de cama</li>
+          <li>Torneira com filtro</li>
+          <li>Fechadura eletrônica</li>
+          <li>Ar condicionado frio instalado no ponto de dreno existente</li>
+          <li>Sofá padrão 2 lugares</li>
+          <li>Eletros: geladeira, microondas e cooktop</li>
+          <li>2 cadeiras Eames para bancada</li>
+          <li>2 tapetes e 2 quadros</li>
+          <li>Marcenaria com 3 opções de cores</li>
+          <li>Limpeza para entrega de chaves</li>
+        </ul>
+        <a href="https://api.whatsapp.com/send/?phone=5511921396448&text=Quero%20o%20Pacote%20Start%20da%20Wave%20Invest&type=phone_number&app_absent=0" class="btn btn-outline">
+          Quero o Start <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <!-- ESSENCIAL -->
+      <div class="pkg-card featured">
+        <span class="pkg-badge">Mais escolhido</span>
+        <div class="pkg-plan">
+          <img src="images/plano.essencial.png" alt="Planta baixa do Pacote Essencial" loading="lazy" />
+        </div>
+        <span class="pkg-tier">
+          <span class="pkg-tier-num">02</span> · <em>Conforto + valorização</em>
+        </span>
+        <h3>Essencial</h3>
+        <p class="pkg-tagline">Mais conforto e valorização</p>
+        <div class="pkg-price">
+          <small>Investimento</small>
+          <strong>R$ 79.900</strong>
+        </div>
+        <ul class="pkg-list">
+          <li>Proteção do ambiente</li>
+          <li>Piso cerâmico ou vinílico com rodapé</li>
+          <li>Cerâmica na parede da bancada da cozinha</li>
+          <li>Corte na bancada existente para instalação do cooktop</li>
+          <li>Instalação de spots sobrepostos quadrados ou redondos de LED nos pontos existentes + trilho no ponto principal da sala + adequação de 5 pontos de iluminação</li>
+          <li>Pintura na cor branca, gelo ou bege</li>
+          <li>Kit metais para banheiro e tampa do vaso</li>
+          <li>Box vidro temperado incolor e espelho padrão</li>
+          <li>Cortina blackout</li>
+          <li>Cama box e enxoval de cama</li>
+          <li>Torneira</li>
+          <li>Fechadura eletrônica</li>
+          <li>Ar condicionado frio instalado no ponto de dreno existente</li>
+          <li>Sofá padrão 2 lugares</li>
+          <li>Eletros: geladeira, microondas, cooktop, mixer e filtro de água sem refrigeração</li>
+          <li>2 cadeiras Eames para bancada</li>
+          <li>2 tapetes e 2 quadros</li>
+          <li>Marcenaria com 6 opções de cores e iluminação LED nos pontos principais</li>
+          <li>Limpeza para entrega de chaves</li>
+        </ul>
+        <a href="https://api.whatsapp.com/send/?phone=5511921396448&text=Quero%20o%20Pacote%20Essencial%20da%20Wave%20Invest&type=phone_number&app_absent=0" class="btn btn-outline">
+          Quero o Essencial <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <!-- PRO -->
+      <div class="pkg-card">
+        <div class="pkg-plan">
+          <img src="images/plano.pro.png" alt="Planta baixa do Pacote PRO" loading="lazy" />
+        </div>
+        <span class="pkg-tier">
+          <span class="pkg-tier-num">03</span> · <em>Padrão elevado</em>
+        </span>
+        <h3>PRO</h3>
+        <p class="pkg-tagline">Máxima rentabilidade e padrão elevado</p>
+        <div class="pkg-price">
+          <small>Investimento</small>
+          <strong>R$ 94.900</strong>
+        </div>
+        <ul class="pkg-list">
+          <li>Proteção do ambiente</li>
+          <li>Piso cerâmico ou vinílico com rodapé e nivelamento</li>
+          <li>Envidraçamento de sacada + aquário para condensadora</li>
+          <li>Integração e nivelamento de sacada</li>
+          <li>Cerâmica na parede da bancada da cozinha</li>
+          <li>Corte na bancada existente para instalação do cooktop</li>
+          <li>Extensão da bancada da cozinha com pedra igual à existente</li>
+          <li>Instalação de spots sobrepostos quadrados ou redondos de LED nos pontos existentes + trilho no ponto principal da sala + adequação de 5 pontos de iluminação</li>
+          <li>Pintura na cor a definir e texturização da parede principal do Studio</li>
+          <li>Kit metais para banheiro e tampa do vaso</li>
+          <li>Box vidro temperado incolor e espelho padrão</li>
+          <li>Cortina blackout sob medida</li>
+          <li>Cama box e enxoval de cama</li>
+          <li>Torneira</li>
+          <li>Fechadura eletrônica</li>
+          <li>Ar condicionado quente e frio instalado no ponto de dreno existente</li>
+          <li>Sofá padrão 2 lugares</li>
+          <li>Eletros: geladeira, microondas, cooktop, mixer e filtro de água sem refrigeração</li>
+          <li>2 cadeiras Eames para bancada</li>
+          <li>2 tapetes e 2 quadros</li>
+          <li>Marcenaria com 6 opções de cores e iluminação LED</li>
+          <li>Limpeza para entrega de chaves</li>
+        </ul>
+        <a href="https://api.whatsapp.com/send/?phone=5511921396448&text=Quero%20o%20Pacote%20PRO%20da%20Wave%20Invest&type=phone_number&app_absent=0" class="btn btn-outline">
+          Quero o PRO <span class="arrow">→</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================== DIFFERENTIALS ================== -->
+<section class="diff">
+  <div class="container">
+    <div class="diff-header">
+      <div>
+        <span class="eyebrow">Por que Wave Invest</span>
+        <h2>Diferenciais que <em>fazem o seu retorno acontecer.</em></h2>
+      </div>
+      <p>Cada decisão é tomada com foco em rentabilidade. Do projeto à entrega, tudo é pensado para maximizar diária, ocupação e valorização do imóvel.</p>
+    </div>
+
+    <div class="diff-grid">
+      <div class="diff-item">
+        <span class="diff-num">01</span>
+        <h3>Chave na mão</h3>
+        <p>Você entrega o imóvel e recebe pronto para anunciar.</p>
+      </div>
+      <div class="diff-item">
+        <span class="diff-num">02</span>
+        <h3>Zero dor de cabeça</h3>
+        <p>Nada de fornecedor, prazo ou retrabalho na sua agenda.</p>
+      </div>
+      <div class="diff-item">
+        <span class="diff-num">03</span>
+        <h3>Rentabilidade</h3>
+        <p>Cada decisão é tomada com foco em diária e ocupação.</p>
+      </div>
+      <div class="diff-item">
+        <span class="diff-num">04</span>
+        <h3>Agilidade</h3>
+        <p>Cronograma controlado. Entrega rápida, sem improviso.</p>
+      </div>
+      <div class="diff-item">
+        <span class="diff-num">05</span>
+        <h3>Personalização</h3>
+        <p>Cada imóvel ganha identidade própria para se destacar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== FAQ ================== -->
+<section class="faq" id="faq">
+  <div class="container faq-grid">
+    <div class="faq-side">
+      <span class="eyebrow">Tira-dúvidas</span>
+      <h2>Perguntas <em>frequentes.</em></h2>
+      <p>As principais dúvidas de quem quer transformar um imóvel parado em fonte de renda recorrente.</p>
+      <a href="https://api.whatsapp.com/send/?phone=5511921396448&text=Tenho%20mais%20uma%20d%C3%BAvida%20sobre%20a%20Wave%20Invest&type=phone_number&app_absent=0" class="btn btn-whatsapp">
+        Falar com especialista <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-num">01</span>
+          <span class="faq-q-text">Preciso acompanhar a obra?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Não. Esse é exatamente o ponto da Wave Invest. Cuidamos de fornecedores, equipe,
+          prazos e qualidade. Você recebe atualizações periódicas, mas não precisa estar
+          presente no canteiro de obra em momento algum.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-num">02</span>
+          <span class="faq-q-text">Quanto tempo leva a entrega?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          A entrega chave na mão acontece em torno de 45 dias, dependendo do pacote
+          escolhido e do estado inicial do imóvel. O cronograma é apresentado no início
+          do projeto e respeitado integralmente.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-num">03</span>
+          <span class="faq-q-text">Posso personalizar o pacote?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Sim. Cada imóvel é único. Os pacotes funcionam como base e são ajustados ao
+          perfil do imóvel, ao público que ele vai atender e ao retorno que você busca.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-num">04</span>
+          <span class="faq-q-text">Isso realmente aumenta o retorno?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Sim. Imóveis bem projetados, ambientados e fotografados performam significativamente
+          melhor no Airbnb e em locação por temporada. Diárias mais altas, ocupação maior e
+          valorização do ativo no longo prazo.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-num">05</span>
+          <span class="faq-q-text">A Wave Invest também ajuda com a gestão Airbnb?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Sim. Entregamos o imóvel com fotografia profissional, anúncio otimizado e
+          orientação para gestão. Conectamos também com parceiros especializados em
+          gerenciamento de hospedagem por temporada, caso você queira terceirizar.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-num">06</span>
+          <span class="faq-q-text">Como funciona o pagamento? Preciso ter o valor à vista?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          O investimento é dividido em etapas: sinal no fechamento, parcela na compra de materiais e parcela na entrega final. Aceitamos transferência, boleto e parcelamento no cartão (em até 12x). O valor final é fechado em contrato, sem aditivos surpresa.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-num">07</span>
+          <span class="faq-q-text">E se a obra atrasar?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          O cronograma é registrado em contrato com data de entrega definida. Se houver atraso por culpa da Wave (excluídas força maior e mudanças solicitadas pelo cliente), aplicamos desconto proporcional sobre o valor final. Em mais de 80 imóveis entregues, mantivemos prazo em todos os projetos sem alteração de escopo.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-num">08</span>
+          <span class="faq-q-text">Posso usar o imóvel quando quiser depois de pronto?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Claro. O imóvel continua sendo seu. Você decide o calendário: hospeda família, bloqueia datas, usa em finais de semana ou deixa 100% no Airbnb. A entrega é uma estrutura, o uso é decisão sua.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="faq-q-num">09</span>
+          <span class="faq-q-text">E se eu não gostar do resultado final?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          O projeto é aprovado por você antes da obra começar, em 3D, com cada peça e cada acabamento. Durante a execução, há checkpoints de validação. No final, ajustamos qualquer ponto da entrega que não esteja conforme o aprovado. A garantia de 12 meses cobre marcenaria, instalações e itens entregues.
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== FINAL CTA ================== -->
+<section class="final-cta">
+  <div class="cta-decorations">
+    <div class="cta-glow cta-glow-top"></div>
+    <div class="cta-glow cta-glow-bottom"></div>
+  </div>
+
+  <div class="final-cta-inner">
+    <span class="eyebrow">Pronto para lucrar</span>
+    <h2>Seu imóvel pode estar te fazendo <em>perder dinheiro<br>todos os dias.</em></h2>
+    <p class="final-cta-sub">Comece hoje a transformação. Em 45 dias, seu imóvel pode estar gerando renda recorrente, pronto para a primeira diária.</p>
+
+    <div class="cta-action-block">
+      <a href="https://api.whatsapp.com/send/?phone=5511921396448&text=Quero%20transformar%20meu%20im%C3%B3vel%20em%20renda&type=phone_number&app_absent=0" class="btn-cta-main">
+        <span class="cta-wpp-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.52 3.48A11.78 11.78 0 0012.06 0C5.5 0 .17 5.33.17 11.89c0 2.09.55 4.14 1.6 5.94L0 24l6.32-1.65a11.86 11.86 0 005.74 1.46c6.56 0 11.89-5.33 11.89-11.89 0-3.18-1.24-6.17-3.44-8.44z"/></svg>
+        </span>
+        <span class="cta-label">Quero transformar meu imóvel em renda</span>
+        <span class="arrow">→</span>
+      </a>
+      <p class="cta-microcopy">
+        <span class="cta-pulse"></span>
+        Resposta em até 1h útil · Sem compromisso · Análise feita por especialista
+      </p>
+    </div>
+
+    <div class="cta-meta">
+      <div class="cta-meta-item">
+        <strong>45 dias</strong>
+        <span>até a primeira diária</span>
+      </div>
+      <span class="cta-meta-divider"></span>
+      <div class="cta-meta-item">
+        <strong>12 meses</strong>
+        <span>de garantia em contrato</span>
+      </div>
+      <span class="cta-meta-divider"></span>
+      <div class="cta-meta-item">
+        <strong>+ 87</strong>
+        <span>imóveis transformados</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== FOOTER ================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <div class="footer-logo">
+          Wave Invest
+        </div>
+        <p>Pronto para lucrar. Transformamos seu imóvel em renda recorrente, sem dor de cabeça.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#home">Início</a></li>
+          <li><a href="#solucao">Solução</a></li>
+          <li><a href="#como">Processo</a></li>
+          <li><a href="#pacotes">Pacotes</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="https://api.whatsapp.com/send/?phone=5511921396448&text=Quero%20transformar%20meu%20im%C3%B3vel%20em%20renda&type=phone_number&app_absent=0">Falar com a Wave</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h4>Contato</h4>
+        <p>Telefone: (11) 92139-6448</p>
+        <p>E-mail: contato@waveinvest.com.br</p>
+        <p>Endereço: R. Pio XI, 704 - Alto da Lapa - São Paulo</p>
+        <p>
+          <a href="https://maps.google.com/?q=R.+Pio+XI,+704+-+Alto+da+Lapa,+S%C3%A3o+Paulo"
+             target="_blank" rel="noopener" class="footer-map-link">
+            Ver no mapa →
+          </a>
+        </p>
+        <p class="footer-horario">Seg a Sex: 8h às 18h | Sáb: 9h às 13h</p>
+      </div>
+
+      <div class="footer-social">
+        <h4>Redes</h4>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/waveplanejados" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm0 2h10c1.66 0 3 1.34 3 3v10c0 1.66-1.34 3-3 3H7c-1.66 0-3-1.34-3-3V7c0-1.66 1.34-3 3-3zm5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm5.5-3.25a1.25 1.25 0 11-2.5 0 1.25 1.25 0 012.5 0z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2" fill="currentColor"/></svg>
+          </a>
+          <a href="https://api.whatsapp.com/send/?phone=5511921396448&type=phone_number&app_absent=0" class="social-icon" aria-label="WhatsApp" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.78 11.78 0 0012.06 0C5.5 0 .17 5.33.17 11.89c0 2.09.55 4.14 1.6 5.94L0 24l6.32-1.65a11.86 11.86 0 005.74 1.46c6.56 0 11.89-5.33 11.89-11.89 0-3.18-1.24-6.17-3.44-8.44z"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-trust">
+      <div class="footer-trust-item">
+        <strong>+ 87</strong>
+        <span>imóveis transformados</span>
+      </div>
+      <div class="footer-trust-item">
+        <strong>12 meses</strong>
+        <span>de garantia em contrato</span>
+      </div>
+      <div class="footer-trust-item">
+        <strong>100%</strong>
+        <span>equipe própria</span>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Wave Planejados. Todos os direitos reservados. CNPJ 00.000.000/0001-00</span>
+      <span><em>Pronto para lucrar.</em></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================== FLOATING WHATSAPP ================== -->
+<a href="https://api.whatsapp.com/send/?phone=5511921396448&text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20a%20Wave%20Invest&type=phone_number&app_absent=0" class="float-wpp" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.52 3.48A11.78 11.78 0 0012.06 0C5.5 0 .17 5.33.17 11.89c0 2.09.55 4.14 1.6 5.94L0 24l6.32-1.65a11.86 11.86 0 005.74 1.46h.01c6.56 0 11.89-5.33 11.89-11.89 0-3.18-1.24-6.17-3.44-8.44zM12.07 21.7c-1.74 0-3.45-.47-4.94-1.36l-.35-.21-3.75.98 1-3.66-.23-.37a9.79 9.79 0 01-1.5-5.19c0-5.42 4.42-9.83 9.85-9.83 2.63 0 5.1 1.02 6.96 2.88a9.78 9.78 0 012.88 6.96c0 5.42-4.42 9.83-9.92 9.83zm5.4-7.36c-.3-.15-1.76-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47 0 1.46 1.07 2.87 1.22 3.07.15.2 2.1 3.21 5.09 4.5.71.31 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+</a>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('section').forEach(s => {
+    s.classList.add('reveal');
+    io.observe(s);
+  });
+
+  // Nav background on scroll
+  const nav = document.querySelector('.nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) nav.style.background = 'rgba(238,238,238,0.95)';
+    else nav.style.background = 'rgba(238,238,238,0.78)';
+  });
+</script>
+</body>
+</html>
